@@ -11,18 +11,12 @@ please consult our Course Syllabus.
 
 This file is Copyright (c) 2021 Helen Li.
 """
-import matplotlib
-import pandas, csv, nltk, numpy
-from os import path
-from PIL import Image
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+import pandas, csv, nltk
+from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
-import datetime
 
 from pmaw import PushshiftAPI
 from nltk.sentiment import SentimentIntensityAnalyzer
-from nltk.tokenize import word_tokenize
-from nltk.probability import FreqDist
 
 sia = SentimentIntensityAnalyzer()
 

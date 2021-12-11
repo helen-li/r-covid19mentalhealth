@@ -12,8 +12,10 @@ pmaw
 csv
 pandas
 datetime
+matplotlib
 
 # Sentiment analysis
 nltk
 ssl
 nltk.sentiment
+wordcloud
