@@ -29,13 +29,14 @@ else:
 # Download the necessary nltk data resources for the project
 nltk.download(['vader_lexicon', 'punkt'])
 
-subreddits = ('depression', 'affirmations')
+subreddits = ('depression', 'Anxiety', 'EatingDisorders', 'ForeverAlone', 'HealthAnxiety',
+              'affirmations', 'helpmecope', 'itgetsbetter', 'getting_over_it', 'GetMotivated')
 
 timestamps = [
     int(datetime.datetime(2019, 1, 1, 0, 0).timestamp()),
-    int(datetime.datetime(2019, 3, 1, 0, 0).timestamp()),
+    int(datetime.datetime(2019, 5, 1, 0, 0).timestamp()),
     int(datetime.datetime(2020, 1, 1, 0, 0).timestamp()),
-    int(datetime.datetime(2020, 3, 1, 0, 0).timestamp())
+    int(datetime.datetime(2020, 5, 1, 0, 0).timestamp())
 ]
 
 if __name__ == '__main__':
