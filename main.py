@@ -12,7 +12,12 @@ please consult our Course Syllabus.
 This file is Copyright (c) 2021 Helen Li.
 """
 import datetime, nltk, ssl
+
+import matplotlib
+
 import reddit_analysis as analysis
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 try:
     _create_unverified_https_context = ssl._create_unverified_context
@@ -21,19 +26,22 @@ except AttributeError:
 else:
     ssl._create_default_https_context = _create_unverified_https_context
 
+# Download the necessary nltk data resources for the project
 nltk.download(['vader_lexicon', 'punkt'])
 
 subreddits = ('depression', 'affirmations')
 
-time_1 = int(datetime.datetime(2019, 1, 1, 0, 0).timestamp())
-time_2 = int(datetime.datetime(2019, 3, 1, 0, 0).timestamp())
-time_3 = int(datetime.datetime(2020, 1, 1, 0, 0).timestamp())
-time_4 = int(datetime.datetime(2020, 3, 1, 0, 0).timestamp())
+timestamps = [
+    int(datetime.datetime(2019, 1, 1, 0, 0).timestamp()),
+    int(datetime.datetime(2019, 3, 1, 0, 0).timestamp()),
+    int(datetime.datetime(2020, 1, 1, 0, 0).timestamp()),
+    int(datetime.datetime(2020, 3, 1, 0, 0).timestamp())
+]
 
 if __name__ == '__main__':
     # print("Scraping data from reddit...")
-    # analysis.scrape_subreddit_posts(time_1, time_2, subreddits, 'before')
-    # analysis.scrape_subreddit_posts(time_3, time_4, subreddits, 'after')
+    # analysis.scrape_subreddit_posts(timestamps[0], timestamps[1], subreddits, 'before')
+    # analysis.scrape_subreddit_posts(timestamps[2], timestamps[3], subreddits, 'after')
     # print("Reddit data has been acquired and saved as csv files in the data folder")
 
     for subreddit in subreddits:
@@ -42,4 +50,21 @@ if __name__ == '__main__':
         before_intensity = analysis.average_intensity(list(before_intensities.values()))
         after_intensity = analysis.average_intensity(list(after_intensities.values()))
         print(f'{subreddit} --- Before: {before_intensity}, After: {after_intensity}')
+
+    # test_intensities = analysis.compile_text_data(f'data/depression_after.csv')
+    # x_vals = []
+    # y_vals = []
+    # for timestamp in sorted(test_intensities):
+    #     current_datetime = datetime.datetime.fromtimestamp(timestamp)
+    #     x_vals.append(current_datetime)
+    #     y_vals.append(test_intensities[timestamp])
+    #
+    # dates = matplotlib.dates.date2num(x_vals)
+    # plt.plot_date(dates, y_vals)
+    #
+    # # plt.plot(x_vals, y_vals)
+    # #
+    # # ani = FuncAnimation(plt.gcf(), analysis.animate(before_intensities), interval=100)
+    # # plt.tight_layout()
+    # plt.show()
 

@@ -11,11 +11,13 @@ please consult our Course Syllabus.
 
 This file is Copyright (c) 2021 Helen Li.
 """
+import matplotlib
 import pandas, csv, nltk, numpy
 from os import path
 from PIL import Image
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import matplotlib.pyplot as plt
+import datetime
 
 from pmaw import PushshiftAPI
 from nltk.sentiment import SentimentIntensityAnalyzer
@@ -44,6 +46,21 @@ def scrape_subreddit_posts(after: int, before: int, subreddits: tuple, postfix: 
         posts_df.to_csv(f'data/{subreddit}_{postfix}.csv', header=True, index=False,
                         columns=list(posts_df.axes[1]), encoding='utf-8-sig')
 
+# def animate(timestamp_to_intensity: dict[int: float]):
+#     """
+#
+#     """
+#     x_vals = []
+#     y_vals = []
+#
+#     sorted_timestamps = sorted(timestamp_to_intensity)
+#     for timestamp in sorted_timestamps:
+#         current_datetime = datetime.datetime.fromtimestamp(timestamp)
+#         x_vals.append(current_datetime)
+#         y_vals.append(timestamp_to_intensity[timestamp])
+#
+#         plt.cla()
+#         plt.plot(x_vals, y_vals)
 
 def compile_text_data(filename: str) -> dict[int, float]:
     """
