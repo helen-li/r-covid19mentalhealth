@@ -12,13 +12,10 @@ please consult our Course Syllabus.
 This file is Copyright (c) 2021 Helen Li.
 """
 import datetime, nltk, ssl
-
-import matplotlib
-
 import reddit_analysis as analysis
-import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+import post
 
+# Ensure a smooth process of downloading
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -29,8 +26,8 @@ else:
 # Download the necessary nltk data resources for the project
 nltk.download(['vader_lexicon', 'punkt'])
 
-subreddits = ('depression', 'Anxiety', 'EatingDisorders', 'ForeverAlone', 'HealthAnxiety',
-              'affirmations', 'helpmecope', 'itgetsbetter', 'getting_over_it', 'GetMotivated')
+# Store the relevant subreddits in a tuple structure
+subreddits = ('depression', 'Anxiety', 'OCD', 'insomnia', 'PanicAttack', 'mentalhealth', 'counseling', 'Psychiatry')
 
 timestamps = [
     int(datetime.datetime(2019, 1, 1, 0, 0).timestamp()),
@@ -40,32 +37,26 @@ timestamps = [
 ]
 
 if __name__ == '__main__':
-    # print("Scraping data from reddit...")
-    # analysis.scrape_subreddit_posts(timestamps[0], timestamps[1], subreddits, 'before')
-    # analysis.scrape_subreddit_posts(timestamps[2], timestamps[3], subreddits, 'after')
-    # print("Reddit data has been acquired and saved as csv files in the data folder")
+    print("Scraping data from reddit...")
+    analysis.scrape_subreddit_posts(timestamps[0], timestamps[1], subreddits, 'before')
+    analysis.scrape_subreddit_posts(timestamps[2], timestamps[3], subreddits, 'after')
+    print("Reddit data has been acquired and saved as csv files inside the data folder")
 
-    for subreddit in subreddits:
-        before_intensities = analysis.compile_text_data(f'data/{subreddit}_before.csv')
-        after_intensities = analysis.compile_text_data(f'data/{subreddit}_after.csv')
-        before_intensity = analysis.average_intensity(list(before_intensities.values()))
-        after_intensity = analysis.average_intensity(list(after_intensities.values()))
-        print(f'{subreddit} --- Before: {before_intensity}, After: {after_intensity}')
-
-    # test_intensities = analysis.compile_text_data(f'data/depression_after.csv')
-    # x_vals = []
-    # y_vals = []
-    # for timestamp in sorted(test_intensities):
-    #     current_datetime = datetime.datetime.fromtimestamp(timestamp)
-    #     x_vals.append(current_datetime)
-    #     y_vals.append(test_intensities[timestamp])
+    # for subreddit in subreddits:
+    #     before_channel = post.Subreddit(subreddit, f'data/before.csv')
+    #     after_channel = post.Subreddit(subreddit, f'data/after.csv')
     #
-    # dates = matplotlib.dates.date2num(x_vals)
-    # plt.plot_date(dates, y_vals)
+    #     before_intensities = before_channel.intensity_analysis()
+    #     before_polarities = before_channel.polarity_analysis(before_intensities)
     #
-    # # plt.plot(x_vals, y_vals)
-    # #
-    # # ani = FuncAnimation(plt.gcf(), analysis.animate(before_intensities), interval=100)
-    # # plt.tight_layout()
-    # plt.show()
-
+    #     after_intensities = after_channel.intensity_analysis()
+    #     after_polarities = after_channel.polarity_analysis(after_intensities)
+    #
+    #     before_intensity = analysis.average_intensity(list(before_intensities.values()))
+    #     after_intensity = analysis.average_intensity(list(after_intensities.values()))
+    #
+    #     print(f'{subreddit} --- Before: {before_intensity}, After: {after_intensity}')
+    #
+    #     before_channel.word_cloud(f'img/{subreddit}_before.png')
+    #     after_channel.word_cloud(f'img/{subreddit}_after.png')
+    #
