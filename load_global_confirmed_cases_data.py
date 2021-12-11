@@ -60,4 +60,4 @@ def str_to_date(date_string: str) -> datetime.date:
     - date_string has format mm/dd/yy
     """
     split = str.split(date_string, '/')
-    return datetime.date(int(split[2]), int(split[0]), int(split[1]))
+    return datetime.date(2000+int(split[2]), int(split[0]), int(split[1]))
