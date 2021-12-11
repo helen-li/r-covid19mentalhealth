@@ -7,11 +7,12 @@ import pandas as pd
 
 
 def read_xlsx_file(filename: str) -> dict:
-    """Return the data stored in a csv file with the given filename.
+    """Return the data stored in a xlsx file with the given filename.
     The return value is a dict mapping a date to the number of global cases that day.
 
     - Keys are specific dates with type datetime.date.
-    - Values are the number of total cases on that date with type int.
+    - Values are a list of integers containing the number of searches of the corresponding
+        mental health search terms on that date.
 
     Preconditions:
     - file name refers to a valid csv file.
