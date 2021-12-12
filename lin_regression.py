@@ -24,8 +24,8 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
 # Import datasets
-global_cases = read_csv_file('time_series_covid19_confirmed_global.csv')
-search_interest = read_xlsx_file('search_term_worldwide.xlsx')
+global_cases = read_csv_file('covid_data/time_series_covid19_confirmed_global.csv')
+search_interest = read_xlsx_file('search_terms/search_term_worldwide.xlsx')
 
 # Filtering both datasets so that their dates (keys) are identical
 filtered_search_interest = {}
@@ -135,10 +135,6 @@ def graph_7(event):
 btns[7].on_clicked(graph_7)
 
 
-def main() -> None:
+def plot_linear_regression_graph() -> None:
     # default graph is depression
     plot_graph(mh_search_terms[0])
-
-
-if __name__ == "__main__":
-    main()

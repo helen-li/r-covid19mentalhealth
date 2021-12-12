@@ -21,12 +21,11 @@ def read_xlsx_file(filename: str) -> dict:
     df = pd.read_excel(filename)
     # select first column that lists the dates
     first_column = df.iloc[:, 0]
-    list_first_column = [item for item in first_column]
 
     # dictionary to return.
     dictionary = {}
 
-    # iterate through each element in first column
+    # iterate through each element in first_column
     for i in range(len(first_column)):
         # we turn each element in first column to datetime.date type
         date = first_column[i].date()
