@@ -17,6 +17,7 @@ import ssl
 import reddit_analysis as analysis
 import post
 from display_line_graphs import plot_line_graphs
+from lin_regression import plot_linear_regression_graph
 
 if __name__ == '__main__':
     # Ensure a smooth process of downloading required data resources for nltk to function
@@ -45,6 +46,9 @@ if __name__ == '__main__':
 
     # Plots the line graphs
     plot_line_graphs()
+    
+    # Plots the linear regression models
+    plot_linear_regression_graph()
 
     # Scraping posts data from the relevant subreddits
     print("Scraping data from reddit...")
