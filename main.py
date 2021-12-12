@@ -55,10 +55,10 @@ if __name__ == '__main__':
         after_channel = post.Subreddit(subreddit, f'data/after.csv')
 
         before_intensities = before_channel.intensity_analysis()
-        before_polarities = before_channel.polarity_analysis(before_intensities)
+        before_polarities = post.polarity_analysis(before_intensities)
 
         after_intensities = after_channel.intensity_analysis()
-        after_polarities = after_channel.polarity_analysis(after_intensities)
+        after_polarities = post.polarity_analysis(after_intensities)
 
         before_intensity = analysis.average_intensity(list(before_intensities.values()))
         after_intensity = analysis.average_intensity(list(after_intensities.values()))
