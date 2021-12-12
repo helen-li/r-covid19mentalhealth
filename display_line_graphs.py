@@ -77,72 +77,137 @@ def plot_line_graphs() -> None:
         panic_attack_trace + mental_health_trace + counseling_trace + psychiatrist_trace
 
     updatemenus = [
-        dict(active=-1,
+        dict(active=0,
              buttons=list([
                  dict(label='Depression',
                       method='update',
                       args=[{'visible':
-                            [True, False, False, False, False, False, False, False, False]},
+                            [True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward 'Depression'"}]),
 
                  dict(label='Anxiety',
                       method='update',
                       args=[{'visible':
-                            [False, True, False, False, False, False, False, False, False]},
+                            [False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward 'Anxiety'"}]),
 
                  dict(label='Obsessive Compulsive Disorder',
                       method='update',
                       args=[{'visible':
-                            [False, False, True, False, False, False, False, False, False]},
+                            [False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward "
                                       "'Obsessive Compulsive Disorder'"}]),
 
                  dict(label='OCD',
                       method='update',
                       args=[{'visible':
-                            [False, False, False, True, False, False, False, False, False]},
+                            [False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward 'OCD'"}]),
 
                  dict(label='Insomnia',
                       method='update',
                       args=[{'visible':
-                            [False, False, False, False, True, False, False, False, False]},
+                            [False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward 'Insomnia'"}]),
 
                  dict(label='Panic Attack',
                       method='update',
                       args=[{'visible':
-                            [False, False, False, False, False, True, False, False, False]},
+                            [False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward "
                                       "'Panic Attack'"}]),
 
                  dict(label='Mental Health',
                       method='update',
                       args=[{'visible':
-                            [False, False, False, False, False, False, True, False, False]},
+                            [False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward "
                                       "'Mental Health'"}]),
 
                  dict(label='Counseling',
                       method='update',
                       args=[{'visible':
-                            [False, False, False, False, False, False, False, True, False]},
+                            [False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True,
+                             False, False, False, False, False, False, False]},
                             {'title': "COVID-19 Impact on Public Attention Toward 'Counseling'"}]),
 
                  dict(label='Psychiatrist',
                       method='update',
                       args=[{'visible':
-                            [False, False, False, False, False, False, False, False, True]},
+                            [False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             False, False, False, False, False, False, False,
+                             True, True, True, True, True, True, True]},
                             {'title': "COVID-19 Impact on Public Attention Toward "
-                                      "'Psychiatrist'"}]),
-
-                 dict(label='All Terms',
-                      method='update',
-                      args=[{'visible': [True, True, True, True, True, True, True, True, True]},
-                            {
-                                'title': 'COVID-19 Impact on Public Attention Toward '
-                                         'Mental Health Related Search Terms'}]),
+                                      "'Psychiatrist'"}])
              ]),
              )
     ]
