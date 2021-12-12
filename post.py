@@ -175,6 +175,16 @@ def polarity_analysis(intensities: dict[int, float]) -> dict[str, int]:
     return {'positive': pos, 'negative': neg, 'neutral': neu}
 
 
+def average_intensity(intensities: list[float]) -> float:
+    """
+    Returns the average of the values in intensities if intensities is not an empty
+    list; otherwise, returns 0.
+    """
+    if len(intensities) <= 0:
+        return 0
+    return sum(intensities) / len(intensities)
+
+
 if __name__ == '__main__':
     import python_ta
     import python_ta.contracts

@@ -14,7 +14,6 @@ This file is Copyright (c) 2021 Helen Li.
 import pandas
 from pmaw import PushshiftAPI
 
-
 def scrape_subreddit_posts(after: int, before: int, subreddits: tuple, filename: str) -> None:
     """
     From the channels given by the subreddits tuple, scrapes all posts that got posted during
@@ -41,16 +40,6 @@ def scrape_subreddit_posts(after: int, before: int, subreddits: tuple, filename:
     # noinspection PyTypeChecker
     posts_df.to_csv(f'data/{filename}.csv', header=True, index=False,
                     columns=list(posts_df.axes[1]), encoding='utf-8-sig')
-
-
-def average_intensity(intensities: list[float]) -> float:
-    """
-    Returns the average of the values in intensities if intensities is not an empty
-    list; otherwise, returns 0.
-    """
-    if len(intensities) <= 0:
-        return 0
-    return sum(intensities) / len(intensities)
 
 
 if __name__ == '__main__':

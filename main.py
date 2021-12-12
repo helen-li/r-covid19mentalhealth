@@ -14,7 +14,7 @@ This file is Copyright (c) 2021 Helen Li.
 import datetime
 import nltk
 import ssl
-import reddit_analysis as analysis
+from reddit_scrape import scrape_subreddit_posts as scrape
 import post
 from display_line_graphs import plot_line_graphs
 
@@ -34,6 +34,8 @@ if __name__ == '__main__':
     subreddits = ('depression', 'Anxiety', 'OCD', 'insomnia', 'PanicAttack',
                   'mentalhealth', 'counselling', 'Psychiatry')
 
+    covid_terms = {'coronavirus'}
+
     timestamps = [
         int(datetime.datetime(2019, 1, 1, 0, 0).timestamp()),
         int(datetime.datetime(2019, 4, 30, 0, 0).timestamp()),
@@ -45,11 +47,11 @@ if __name__ == '__main__':
     plot_line_graphs()
 
     # Scraping posts data from the relevant subreddits
-    # print("Scraping data from reddit...")
-    # analysis.scrape_subreddit_posts(timestamps[0], timestamps[1], subreddits, 'before')
-    # print("Completed for the first given timeframe...")
-    # analysis.scrape_subreddit_posts(timestamps[2], timestamps[3], subreddits, 'after')
-    # print("Reddit data has been acquired and saved as csv files inside the data folder")
+    print("Scraping data from reddit...")
+    scrape(timestamps[0], timestamps[1], subreddits, 'before')
+    print("Completed for the first given timeframe...")
+    scrape(timestamps[2], timestamps[3], subreddits, 'after')
+    print("Reddit data has been acquired and saved as csv files inside the data folder")
 
     # Perform sentiment analysis and generate word clouds using the scraped data
     for subreddit in subreddits:
@@ -58,15 +60,14 @@ if __name__ == '__main__':
 
         before_intensities = before_channel.intensity_analysis()
         before_polarities = post.polarity_analysis(before_intensities)
+        before_intensity = post.average_intensity(list(before_intensities.values()))
 
         after_intensities = after_channel.intensity_analysis()
         after_polarities = post.polarity_analysis(after_intensities)
+        after_intensity = post.average_intensity(list(after_intensities.values()))
 
-        before_intensity = analysis.average_intensity(list(before_intensities.values()))
-        after_intensity = analysis.average_intensity(list(after_intensities.values()))
-
-        before_frequency = before_channel.words_frequency({'coronavirus'})
-        after_frequency = after_channel.words_frequency({'coronavirus'})
+        before_frequency = before_channel.words_frequency(covid_terms)
+        after_frequency = after_channel.words_frequency(covid_terms)
 
         print(f'----- r/{subreddit} ----- \n'
               f'::::: Intensity values ::::: \n'
