@@ -182,7 +182,7 @@ def filter_text(text: str) -> str:
 def eliminate_contractions(text: str) -> [str, bool]:
     """
     Returns a list of 2 values, first of which is the same string with contractions expanded
-    and second of which is the boolean value of whether contractions were expanded.
+    and second of which is the boolean value of whether contractions were found in text.
 
     >>> eliminate_contractions("I've eaten already.")
     'I have eaten already.'
@@ -195,3 +195,20 @@ def eliminate_contractions(text: str) -> [str, bool]:
             changed = True
 
     return [text, changed]
+
+
+if __name__ == '__main__':
+    import python_ta
+    import python_ta.contracts
+
+    python_ta.contracts.DEBUG_CONTRACTS = False
+    python_ta.contracts.check_all_contracts()
+
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': ['python_ta.contacts', 'python_ta'],
+        # the names (strs) of functions that call print/open/input
+        'allowed-io': [],
+        'max-line-length': 100,
+        'disable': ['R1705', 'C0200']
+    })

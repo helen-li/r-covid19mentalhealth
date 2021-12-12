@@ -12,9 +12,11 @@ please consult our Course Syllabus.
 This file is Copyright (c) 2021 Helen Li.
 """
 from dataclasses import dataclass
-import csv, process_text, nltk
+import csv
+import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 from wordcloud import WordCloud
+import process_text
 
 STOPWORDS = {
     "a", "able", "about", "across", "after", "all", "almost", "also", "am", "among", "an",
@@ -28,7 +30,9 @@ STOPWORDS = {
     "they", "this", "tis", "to", "too", "twas", "us", "wants", "was", "we", "were", "what",
     "when", "where", "which", "while", "who", "whom", "why", "will", "with", "would", "yet",
     "you", "your", "fucking", "fuck", "shit", "la", "li", "lu", "le", "lo", 'want', 'people',
-    'life'
+    'life', 'im', 'thing', 'ill', 'something', 'actually', 'dont', 'really', 'ive', 'cant',
+    'id', 'thats', 'etc', 'now', 'things', 'know', 'think', 'feel', 'anyone', 'maybe', 'even',
+    'thought', 'thoughts', 'one',
 }
 
 
@@ -49,8 +53,8 @@ class RedditPost:
 
     Sample Usage:
     >>> post = RedditPost(name='GoldWhale', timestamp=1548391541, subreddit='depression',\
-                    title=['I have no motivation and I need to vent because I have lost control.'],\
-                    text=['I want to be healthier', 'I want to be more engaged'])
+                title=['I have no motivation and I need to vent because I have lost control.'],\
+                text=['I want to be healthier', 'I want to be more engaged'])
     """
     name: str
     timestamp: int
@@ -131,56 +135,56 @@ class Subreddit:
             for sentence in sentences:
                 intensity_so_far.append(sia.polarity_scores(sentence)['compound'])
             if len(intensity_so_far) > 0:
-                posts_intensity_so_far[post.timestamp] = sum(intensity_so_far) / len(intensity_so_far)
+                posts_intensity_so_far[post.timestamp] = \
+                    sum(intensity_so_far) / len(intensity_so_far)
 
         return posts_intensity_so_far
 
-    def polarity_analysis(self, intensities: dict[int, float]) -> dict[str, int]:
+    def word_cloud(self, output_file: str) -> None:
         """
-        Returns the number of positive, negative, and neutral posts based intensity values
-        passed in from intensities.
-        """
-        pos, neg, neu = 0, 0, 0
-
-        for timestamp in intensities:
-            if intensities[timestamp] >= 0.05:
-                pos += 1
-            elif intensities[timestamp] <= -0.05:
-                neg += 1
-            else:
-                neu += 1
-
-        return {'positive': pos, 'negative': neg, 'neutral': neu}
-
-    def word_cloud(self, output_name: str) -> None:
-        """
-        Generates a word cloud and stores the output image in a file named output_name.png.
+        Generates a word cloud and stores the output image in a file named output_file.
         """
         text = ''
         for post in self._posts:
             text = text + ' '.join(post.title) + ' ' + ' '.join(post.text)
 
-        wordcloud = WordCloud(stopwords=STOPWORDS, colormap='Reds', width=1000, height=1000, mode='RGBA',
+        wordcloud = WordCloud(stopwords=STOPWORDS, colormap='Reds',
+                              width=1000, height=1000, mode='RGBA',
                               background_color='white').generate(process_text.filter_text(text))
-        # plt.imshow(wordcloud, interpolation='bilinear')
-        # plt.axis("off")
-        # plt.margins(x=0, y=0)
-        # plt.show()
-        wordcloud.to_file(output_name)
+        wordcloud.to_file(output_file)
+
+
+def polarity_analysis(intensities: dict[int, float]) -> dict[str, int]:
+    """
+    Returns the number of positive, negative, and neutral posts based intensity values
+    passed in from intensities.
+    """
+    pos, neg, neu = 0, 0, 0
+
+    for timestamp in intensities:
+        if intensities[timestamp] >= 0.05:
+            pos += 1
+        elif intensities[timestamp] <= -0.05:
+            neg += 1
+        else:
+            neu += 1
+
+    return {'positive': pos, 'negative': neg, 'neutral': neu}
 
 
 if __name__ == '__main__':
     import python_ta
-    # import python_ta.contracts
-    #
-    # python_ta.contracts.DEBUG_CONTRACTS = False
-    # python_ta.contracts.check_all_contracts()
-    #
-    # python_ta.check_all(config={
-    #     # the names (strs) of imported modules
-    #     'extra-imports': ['pandas', 'pmaw', 'python_ta.contacts', 'python_ta'],
-    #     # the names (strs) of functions that call print/open/input
-    #     'allowed-io': ['scrape_reddit_data'],
-    #     'max-line-length': 100,
-    #     'disable': ['R1705', 'C0200']
-    # })
+    import python_ta.contracts
+
+    python_ta.contracts.DEBUG_CONTRACTS = False
+    python_ta.contracts.check_all_contracts()
+
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': ['dataclasses', 'csv', 'nltk', 'nltk.sentiment', 'wordcloud',
+                          'process_text', 'python_ta.contacts', 'python_ta'],
+        # the names (strs) of functions that call print/open/input
+        'allowed-io': ['__init__'],
+        'max-line-length': 100,
+        'disable': ['R1705', 'C0200']
+    })
