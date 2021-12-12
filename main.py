@@ -45,11 +45,11 @@ if __name__ == '__main__':
     plot_line_graphs()
 
     # Scraping posts data from the relevant subreddits
-    print("Scraping data from reddit...")
-    analysis.scrape_subreddit_posts(timestamps[0], timestamps[1], subreddits, 'before')
-    print("Completed for the first given timeframe...")
-    analysis.scrape_subreddit_posts(timestamps[2], timestamps[3], subreddits, 'after')
-    print("Reddit data has been acquired and saved as csv files inside the data folder")
+    # print("Scraping data from reddit...")
+    # analysis.scrape_subreddit_posts(timestamps[0], timestamps[1], subreddits, 'before')
+    # print("Completed for the first given timeframe...")
+    # analysis.scrape_subreddit_posts(timestamps[2], timestamps[3], subreddits, 'after')
+    # print("Reddit data has been acquired and saved as csv files inside the data folder")
 
     # Perform sentiment analysis and generate word clouds using the scraped data
     for subreddit in subreddits:
@@ -65,8 +65,16 @@ if __name__ == '__main__':
         before_intensity = analysis.average_intensity(list(before_intensities.values()))
         after_intensity = analysis.average_intensity(list(after_intensities.values()))
 
-        print(f'r/{subreddit} --- Before: {before_intensity}, After: {after_intensity}')
-        print(f'r/{subreddit} --- Before: {before_polarities}, After: {after_polarities}')
+        before_frequency = before_channel.words_frequency({'coronavirus'})
+        after_frequency = after_channel.words_frequency({'coronavirus'})
+
+        print(f'----- r/{subreddit} ----- \n'
+              f'::::: Intensity values ::::: \n'
+              f'Before: {before_intensity}, After: {after_intensity} \n'
+              f'::::: Polarity values ::::: \n'
+              f'Before: {before_polarities}, After: {after_polarities} \n'
+              f'::::: Frequency of "coronavirus" in r/{subreddit} ::::: \n'
+              f'Before: {before_frequency}, After: {after_frequency}')
 
         print(f'Generating the first word cloud for subreddit r/{subreddit}...')
         before_channel.word_cloud(f'img/{subreddit}_before.png')

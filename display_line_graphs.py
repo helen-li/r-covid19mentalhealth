@@ -77,7 +77,7 @@ def plot_line_graphs() -> None:
         panic_attack_trace + mental_health_trace + counseling_trace + psychiatrist_trace
 
     updatemenus = [
-        dict(active=0,
+        dict(active=-1,
              buttons=list([
                  dict(label='Depression',
                       method='update',
