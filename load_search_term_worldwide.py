@@ -15,7 +15,7 @@ def read_xlsx_file(filename: str) -> dict:
         mental health search terms on that date.
 
     Preconditions:
-    - file name refers to a valid csv file.
+    - file name refers to a valid xlsx file.
     """
     # reading the excel file
     df = pd.read_excel(filename)

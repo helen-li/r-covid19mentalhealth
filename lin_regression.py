@@ -70,18 +70,20 @@ def plot_graph(search_term: str):
     # The coefficient of determination: 1 is perfect prediction
     print("Coefficient of determination: %.2f" % r2_score(y, y_pred))
 
+    _, ax = plt.subplots()
+
+    plt.subplots_adjust(bottom=0.25)
+
     # Plotting original data points
-    plt.scatter(x, y, color="black")
+    plt.scatter(x, y, linewidth=2, color="black")
     # Plotting the linear regression model
     plt.plot(x, y_pred, color="blue", linewidth=3)
 
     # Labelling Axis and Title
-    plt.xlabel('Globally Confirmed Covid Cases')
-    plt.ylabel(search_term)
-    plt.title('The relationship between Covid Cases and ' + search_term)
+    ax.set(xlabel='Globally Confirmed Covid Cases', ylabel=search_term,
+           title='The relationship between Covid Cases and ' + search_term)
 
     return plt.show()
-
 
 # Create buttons
 btns = []
@@ -92,26 +94,51 @@ for i in range(len(mh_search_terms)):
     btns.append(btn)
 
 # all the possible graphs
-graph_0 = plot_graph(mh_search_terms[0])
-graph_1 = plot_graph(mh_search_terms[1])
-graph_2 = plot_graph(mh_search_terms[2])
-graph_3 = plot_graph(mh_search_terms[3])
-graph_4 = plot_graph(mh_search_terms[4])
-graph_5 = plot_graph(mh_search_terms[5])
-graph_6 = plot_graph(mh_search_terms[6])
-graph_7 = plot_graph(mh_search_terms[7])
+def graph_0(event):
+    plot_graph(mh_search_terms[0])
+    plt.draw()
+    btns[0].on_clicked(graph_0)
+
+def graph_1(event):
+    plot_graph(mh_search_terms[1])
+    plt.draw()
+btns[1].on_clicked(graph_1)
+
+def graph_2(event):
+    plot_graph(mh_search_terms[2])
+    plt.draw()
+btns[2].on_clicked(graph_2)
+
+def graph_3(event):
+    plot_graph(mh_search_terms[3])
+    plt.draw()
+btns[3].on_clicked(graph_3)
+
+def graph_4(event):
+    plot_graph(mh_search_terms[4])
+    plt.draw()
+btns[4].on_clicked(graph_4)
+
+def graph_5(event):
+    plot_graph(mh_search_terms[5])
+    plt.draw()
+btns[5].on_clicked(graph_5)
+
+def graph_6(event):
+    plot_graph(mh_search_terms[6])
+    plt.draw()
+btns[6].on_clicked(graph_6)
+
+def graph_7(event):
+    plot_graph(mh_search_terms[7])
+    plt.draw()
+btns[7].on_clicked(graph_7)
+
 
 def main() -> None:
+    # default graph is depression
+    plot_graph(mh_search_terms[0])
 
-
-    btns[0].on_clicked(graph_0)
-    btns[1].on_clicked(graph_1)
-    btns[2].on_clicked(graph_2)
-    btns[3].on_clicked(graph_3)
-    btns[4].on_clicked(graph_4)
-    btns[5].on_clicked(graph_5)
-    btns[6].on_clicked(graph_6)
-    btns[7].on_clicked(graph_7)
 
 if __name__ == "__main__":
     main()
