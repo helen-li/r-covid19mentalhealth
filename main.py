@@ -16,11 +16,11 @@ import nltk
 import ssl
 import reddit_analysis as analysis
 import post
-
+from display_line_graphs import plot_line_graphs
 
 if __name__ == '__main__':
 
-    # Ensure a smooth process of downloading
+    # Ensure a smooth process of downloading required data resources for nltk to function
     try:
         _create_unverified_https_context = ssl._create_unverified_context
     except AttributeError:
@@ -41,6 +41,9 @@ if __name__ == '__main__':
         int(datetime.datetime(2020, 1, 1, 0, 0).timestamp()),
         int(datetime.datetime(2020, 4, 30, 0, 0).timestamp())
     ]
+
+    # Plots the line graphs
+    plot_line_graphs()
 
     # Scraping posts data from the relevant subreddits
     print("Scraping data from reddit...")
