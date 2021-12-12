@@ -1,4 +1,4 @@
-# CSC110Y1F: Python libraries we'll be using for our project.
+# CSC110Y1F: Python libraries we'll be using for our final project.
 
 # Testing and code checking
 hypothesis
@@ -13,6 +13,7 @@ csv
 pandas
 datetime
 matplotlib
+openpyxl
 
 # Sentiment analysis
 nltk

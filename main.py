@@ -19,7 +19,6 @@ import post
 from display_line_graphs import plot_line_graphs
 
 if __name__ == '__main__':
-
     # Ensure a smooth process of downloading required data resources for nltk to function
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -31,7 +30,7 @@ if __name__ == '__main__':
     # Download the necessary nltk data resources for the project
     nltk.download(['vader_lexicon', 'punkt'])
 
-    # Store the relevant subreddits in a tuple structure
+    # Store the relevant subreddits
     subreddits = ('depression', 'Anxiety', 'OCD', 'insomnia', 'PanicAttack',
                   'mentalhealth', 'counselling', 'Psychiatry')
 
@@ -66,10 +65,11 @@ if __name__ == '__main__':
         before_intensity = analysis.average_intensity(list(before_intensities.values()))
         after_intensity = analysis.average_intensity(list(after_intensities.values()))
 
-        print(f'{subreddit} --- Before: {before_intensity}, After: {after_intensity}')
-        print(f'{subreddit} --- Before: {before_polarities}, After: {after_polarities}')
+        print(f'r/{subreddit} --- Before: {before_intensity}, After: {after_intensity}')
+        print(f'r/{subreddit} --- Before: {before_polarities}, After: {after_polarities}')
 
-        print(f'Generating word clouds for {subreddit}...')
+        print(f'Generating the first word cloud for subreddit r/{subreddit}...')
         before_channel.word_cloud(f'img/{subreddit}_before.png')
+        print(f'Generating the second word cloud for subreddit r/{subreddit}...')
         after_channel.word_cloud(f'img/{subreddit}_after.png')
-        print(f'Word clouds generated for {subreddit}!')
+        print(f'Word clouds generated for subreddit r/{subreddit}!')

@@ -29,15 +29,16 @@ STOPWORDS = {
     "since", "so", "some", "than", "that", "the", "their", "them", "then", "there", "these",
     "they", "this", "tis", "to", "too", "twas", "us", "wants", "was", "we", "were", "what",
     "when", "where", "which", "while", "who", "whom", "why", "will", "with", "would", "yet",
-    "you", "your", "fucking", "fuck", "shit", 'want', 'people',
-    'life', 'im', 'thing', 'ill', 'something', 'actually', 'dont', 'really', 'ive', 'didnt', 'cant',
-    'id', 'thats', 'etc', 'now', 'things', 'know', 'think', 'feel', 'anyone', 'maybe', 'even',
-    'thought', 'thoughts', 'one', 'probably', 'sometime', 'sometimes', 'still', 'being', 'always',
-    'alway', 'someone', 'up', 'person', 'everything', 'going', 'here', 'out', 'usually', 'through',
-    'seem', 'er', 'very', 'anything'
+    "you", "your", "fucking", "fuck", "shit", 'want', 'people', 'one', 'two', 'three', 'four',
+    'five', 'six', 'seven', 'eight', 'nine', 'ten', 'life', 'im', 'thing', 'ill', 'something',
+    'actually', 'dont', 'really', 'ive', 'didnt', 'cant', 'id', 'thats', 'etc', 'now', 'things',
+    'know', 'think', 'feel', 'anyone', 'maybe', 'even', 'thought', 'thoughts', 'one', 'probably',
+    'sometime', 'sometimes', 'still', 'being', 'always', 'alway', 'someone', 'up', 'person',
+    'everything', 'going', 'here', 'out', 'usually', 'through', 'seem', 'er', 'very', 'anything',
+    'anyway', 'theres', 'wanna', 'literally', 'doesnt', 'though'
 }
 
-# "la", "li", "lu", "le", "lo",
+
 @dataclass
 class RedditPost:
     """A post made by a user on Reddit.
