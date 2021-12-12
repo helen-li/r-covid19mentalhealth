@@ -12,11 +12,13 @@ please consult our Course Syllabus.
 This file is Copyright (c) 2021 Sarah Xu & Chloe Lam.
 """
 
+# Importing modules and classes
 from load_global_confirmed_cases_data import read_csv_file
 from load_search_term_worldwide import read_xlsx_file
 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.widgets import Button
 
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
@@ -36,14 +38,22 @@ for date in filtered_search_interest:
     if date in search_interest:
         filtered_global_cases[date] = global_cases[date]
 
+# All Mental Health Search Terms in a list
+mh_search_terms = ['depression', 'anxiety', 'obsessive compulsive disorder', 'ocd',
+                   'insomnia', 'panic attack', 'mental health', 'counseling', 'psychiatrist']
 
-def main() -> None:
+# Plot a graph based on the search term input
+def plot_graph(search_term: str):
     """Fit a linear regression model to predict search term interest in 9 mental health
     related key-terms (depression, anxiety, ocd, obsessive compulsive disorder, panic attack,
-    mental health, insomnia, counseling, psychiatrist) and plotting them.
-    """
+    mental health, insomnia, counseling, psychiatrist) and plotting them. """
+
+    # Match the corresponding search_term input to mh_search_terms
+    term_index = mh_search_terms.index(search_term)
+
+    # Generate x and y values
     x = np.array([cases for cases in filtered_global_cases.values()]).reshape((-1, 1))
-    y = np.array([filtered_search_interest[key][4] for key in filtered_search_interest.keys()])  # depression
+    y = np.array([filtered_search_interest[key][term_index] for key in filtered_search_interest.keys()])
 
     # Create a linear regression object
     regr = LinearRegression()
@@ -67,11 +77,41 @@ def main() -> None:
 
     # Labelling Axis and Title
     plt.xlabel('Globally Confirmed Covid Cases')
-    plt.ylabel('Search Interest')
-    plt.title('The relationship between Covid Cases and Mental Health Search Terms')
+    plt.ylabel(search_term)
+    plt.title('The relationship between Covid Cases and ' + search_term)
 
-    plt.show()
+    return plt.show()
 
+
+# Create buttons
+btns = []
+for i in range(len(mh_search_terms)):
+    # xposition, yposition, width, height
+    axes = plt.axes([0.1, i * 0.1, 0.2, 0.1])
+    btn = Button(axes, label=mh_search_terms[i], color='white', hovercolor='grey')
+    btns.append(btn)
+
+# all the possible graphs
+graph_0 = plot_graph(mh_search_terms[0])
+graph_1 = plot_graph(mh_search_terms[1])
+graph_2 = plot_graph(mh_search_terms[2])
+graph_3 = plot_graph(mh_search_terms[3])
+graph_4 = plot_graph(mh_search_terms[4])
+graph_5 = plot_graph(mh_search_terms[5])
+graph_6 = plot_graph(mh_search_terms[6])
+graph_7 = plot_graph(mh_search_terms[7])
+
+def main() -> None:
+
+
+    btns[0].on_clicked(graph_0)
+    btns[1].on_clicked(graph_1)
+    btns[2].on_clicked(graph_2)
+    btns[3].on_clicked(graph_3)
+    btns[4].on_clicked(graph_4)
+    btns[5].on_clicked(graph_5)
+    btns[6].on_clicked(graph_6)
+    btns[7].on_clicked(graph_7)
 
 if __name__ == "__main__":
     main()
