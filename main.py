@@ -17,6 +17,7 @@ import ssl
 from reddit_scrape import scrape_subreddit_posts as scrape
 import post
 from display_line_graphs import plot_line_graphs
+# from lin_regression import plot_linear_regression_graph
 
 if __name__ == '__main__':
     # Ensure a smooth process of downloading required data resources for nltk to function
@@ -45,6 +46,9 @@ if __name__ == '__main__':
 
     # Plots the line graphs
     plot_line_graphs()
+
+    # Plots the linear regression models
+    # plot_linear_regression_graph()
 
     # Scraping posts data from the relevant subreddits
     print("Scraping data from reddit...")
@@ -75,8 +79,8 @@ if __name__ == '__main__':
               f'::::: Frequency of {covid_terms} in r/{subreddit} ::::: \n'
               f'After: {after_frequency}')
 
-        print(f'----- Word clouds coming for r/{subreddit} ----- \n'
-              f'Generating the first word cloud for subreddit r/{subreddit}...')
+        print(f'----- Word clouds coming for r/{subreddit} ----- \n')
+        print(f'Generating the first word cloud for subreddit r/{subreddit}...')
         before_channel.word_cloud(f'img/{subreddit}_before.png')
         print(f'Generating the second word cloud for subreddit r/{subreddit}...')
         after_channel.word_cloud(f'img/{subreddit}_after.png')
