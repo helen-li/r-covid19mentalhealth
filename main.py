@@ -9,7 +9,7 @@ distribution of this code, whether as given or with any changes, are
 expressly prohibited. For more information on copyright for CSC110 materials,
 please consult our Course Syllabus.
 
-This file is Copyright (c) 2021 Asma Jaseem, Helen Li, Chloe Lam, Sarah Yi.
+This file is Copyright (c) 2021 Asma Jaseem, Helen Li, Chloe Lam, Sarah Xu.
 """
 import datetime
 import nltk
@@ -20,6 +20,7 @@ from reddit_scrape import scrape_subreddit_posts as scrape
 import post
 from display_line_graphs import plot_line_graphs
 from lin_regression import plot_linear_regression_graph, MH_SEARCH_TERMS
+
 
 if __name__ == '__main__':
     # Plots the line graphs

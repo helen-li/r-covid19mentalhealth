@@ -9,7 +9,7 @@ distribution of this code, whether as given or with any changes, are
 expressly prohibited. For more information on copyright for CSC110 materials,
 please consult our Course Syllabus.
 
-This file is Copyright (c) 2021 Sarah Xu, Chloe Lam.
+This file is Copyright (c) 2021 Sarah Xu, Chloe Lam, Helen Li.
 """
 import csv
 import datetime

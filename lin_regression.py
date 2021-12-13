@@ -9,7 +9,7 @@ distribution of this code, whether as given or with any changes, are
 expressly prohibited. For more information on copyright for CSC110 materials,
 please consult our Course Syllabus.
 
-This file is Copyright (c) 2021 Sarah Xu, Chloe Lam.
+This file is Copyright (c) 2021 Sarah Xu, Chloe Lam, Helen Li.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -73,56 +73,56 @@ def plot_graph(search_term: str) -> plt.show():
     return plt.show()
 
 
-# all the possible graphs
-def graph_0(event) -> None:
+# all the possible graphs functions
+def graph_0(event: str) -> None:
     """Plots graph for search term "depression"."""
     plot_graph(MH_SEARCH_TERMS[0])
     plt.draw()
 
 
-def graph_1(event) -> None:
+def graph_1(event: str) -> None:
     """Plots graph for search term "anxiety"."""
     plot_graph(MH_SEARCH_TERMS[1])
     plt.draw()
 
 
-def graph_2(event) -> None:
+def graph_2(event: str) -> None:
     """Plots graph for search term "obsessive compulsive disorder"."""
     plot_graph(MH_SEARCH_TERMS[2])
     plt.draw()
 
 
-def graph_3(event) -> None:
+def graph_3(event: str) -> None:
     """Plots graph for search term "ocd"."""
     plot_graph(MH_SEARCH_TERMS[3])
     plt.draw()
 
 
-def graph_4(event) -> None:
+def graph_4(event: str) -> None:
     """Plots graph for search term "insomnia"."""
     plot_graph(MH_SEARCH_TERMS[4])
     plt.draw()
 
 
-def graph_5(event) -> None:
+def graph_5(event: str) -> None:
     """Plots graph for search term "panic attack"."""
     plot_graph(MH_SEARCH_TERMS[5])
     plt.draw()
 
 
-def graph_6(event) -> None:
+def graph_6(event: str) -> None:
     """Plots graph for search term "mental health"."""
     plot_graph(MH_SEARCH_TERMS[6])
     plt.draw()
 
 
-def graph_7(event) -> None:
+def graph_7(event: str) -> None:
     """Plots graph for search term "counseling"."""
     plot_graph(MH_SEARCH_TERMS[7])
     plt.draw()
 
 
-def graph_8(event) -> None:
+def graph_8(event: str) -> None:
     """Plots graph for search term "psychiatrist"."""
     plot_graph(MH_SEARCH_TERMS[8])
     plt.draw()
@@ -154,8 +154,7 @@ if __name__ == '__main__':
         # the names (strs) of imported modules
         'extra-imports': ['numpy', 'matplotlib.pyplot', 'matplotlib.widgets',
                           'sklearn.linear_model', 'sklearn.metrics',
-                          'load_global_confirmed_cases_data', 'load_search_term_worldwide',
-                          'python_ta.contacts', 'python_ta'],
+                          'oad_regression_data', 'python_ta.contacts', 'python_ta'],
         # the names (strs) of functions that call print/open/input
         'allowed-io': ['read_csv_file', 'plot_graph'],
         'max-line-length': 100,

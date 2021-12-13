@@ -14,7 +14,6 @@ This file is Copyright (c) 2021 Asma Jaseem, Helen Li.
 import plotly.express as px
 import plotly.io as pio
 import pandas
-import openpyxl
 
 
 def read_xslx_file(filename: str, term: str) -> dict[str, list]:
