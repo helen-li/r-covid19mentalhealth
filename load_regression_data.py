@@ -19,21 +19,19 @@ import pandas as pd
 
 def read_xlsx_file(filename: str) -> dict:
     """Return the data stored in a xlsx file with the given filename.
-    The return value is a dict mapping a date to the number of global cases that day.
-    - Keys are specific dates with type datetime.date.
-    - Values are a list of integers containing the number of searches of the corresponding
-        mental health search terms on that date.
+    The return value is a dictionary mapping a date to the popularity of
+    mental health-related search terms that day. The keys are specific
+    dates with type datetime.date, and the values are a list of integers
+    containing the number of searches for the corresponding
+    mental health-related search terms on that day.
+
     Preconditions:
-    - file name refers to a valid xlsx file.
+      - filename refers to a valid xlsx file.
     """
     # reading the excel file
     df = pd.read_excel(filename)
     # select first column that lists the dates
     first_column = df.iloc[:, 0]
-    # # extract all the years from first_column
-    # years = first_column.dt.year
-    # # modify the year to only the last two digits. For example, 2019 becomes 19.
-    # list_years = [int(str(item)[-2:]) for item in years]
     # dictionary to return.
     dictionary = {}
 
@@ -50,14 +48,14 @@ def read_xlsx_file(filename: str) -> dict:
 
 def read_csv_file(filename: str) -> dict:
     """Return the data stored in a csv file with the given filename.
-    The return value is a dict mapping a date to the number of global cases that day.
-
-    - Keys are specific dates with type datetime.date.
-    - Values are the number of total cases on that date with type int.
+    The return value is a dictionary mapping a date to the number of
+    global cases that day. The keys are specific dates with type
+    datetime.date, and the values are the number of total cases
+    on that day with type int.
 
     Preconditions:
       - file name refers to a valid csv file.
-      """
+    """
     with open(filename) as file:
         reader = csv.reader(file)
         data = [process_row(row) for row in reader]
@@ -66,10 +64,12 @@ def read_csv_file(filename: str) -> dict:
 
 
 def process_row(row: List) -> list:
-    """Removes the first 4 columns of each row, which are information about geographic location.
-    Returns a list of the number of cases for one country from 1/22/20 to 12/30/21."""
-
+    """Removes the first 4 columns of each row, which are information
+    about geographic location for the files inside covid_data. Returns
+    a list of the number of cases for a country from 1/22/20 to 12/30/21.
+    """
     cases = []
+
     for i in range(4, len(row)):
         if str.isdigit(row[i]):
             cases.append(int(row[i]))
@@ -80,9 +80,10 @@ def process_row(row: List) -> list:
 
 
 def add_col(data: List[List]) -> dict:
-    """Computes the total number of cases on a specific date by adding up the cells
-    of each column, which is the number of cases in one country.
-    Returns a dictionary mapping the date to the number of global cases."""
+    """Computes the total number of cases for a specific date by
+    adding up the cells of each column, which each represents the
+    number of cases in one country. Returns a dictionary mapping
+    the date to the number of global cases."""
     final_data = {}
 
     for col in range(0, 344):
@@ -98,15 +99,17 @@ def str_to_date(date_string: str) -> datetime.date:
     """Converts a string in mm/dd/yy format to a datetime.date.
 
     Preconditions:
-    - date_string has format mm/dd/yy
+      - date_string has format mm/dd/yy
     """
     split = str.split(date_string, '/')
     return datetime.date(2000 + int(split[2]), int(split[0]), int(split[1]))
 
 
 def filter_dataset() -> list[dict]:
-    """
-    Filtering both datasets so that their dates (keys) are identical.
+    """Reads data files for both global confirmed Covid cases and for worldwide
+    mental health-related search terms. Filters both datasets so that their
+    dates (keys in the dict) are identical and returns a list of 2 dictionaries
+    representing first the search interest dataset and then the Covid cases dataset.
     """
     global_cases = read_csv_file('covid_data/time_series_covid19_confirmed_global.csv')
     search_interest = read_xlsx_file('search_terms/search_term_worldwide.xlsx')

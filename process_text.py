@@ -11,6 +11,7 @@ please consult our Course Syllabus.
 
 This file is Copyright (c) 2021 Helen Li.
 """
+# A dictionary of common contractions in English to their expanded form
 PREDEFINED_CONTRACTIONS = {
     "ain't": "am not",
     "aren't": "are not",
@@ -133,8 +134,7 @@ PREDEFINED_CONTRACTIONS = {
 
 
 def count_words(text: str, target_word: str) -> int:
-    """
-    Returns the number of times target_word appears in text, case insensitive.
+    """Returns the number of times target_word appears in text, case insensitive.
 
     Preconditions:
       - all(char.isalpha() for char in target_word)
@@ -155,8 +155,7 @@ def count_words(text: str, target_word: str) -> int:
 
 
 def filter_text(text: str) -> str:
-    """
-    Returns the lowercase version of text after filtering out any
+    """Returns the lowercase version of text after filtering out any
     non-alphabetic characters and expanding any contractions stored
     in the PREDEFINED_CONTRACTIONS dictionary.
 
@@ -181,8 +180,7 @@ def filter_text(text: str) -> str:
 
 
 def eliminate_contractions(text: str) -> [str, bool]:
-    """
-    Returns a list of 2 values.
+    """Returns a list of 2 values.
     The first value in the list is the same string as text with
     any contractions expanded. The second value in the list is a
     boolean representing whether any contractions were expanded.

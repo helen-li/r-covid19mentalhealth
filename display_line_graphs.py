@@ -16,9 +16,13 @@ import plotly.io as pio
 import pandas
 
 
-def read_xslx_file(filename: str, term: str) -> dict[str, list]:
-    """
-    Returns data for the terms based on data stored in the file given by filename.
+def read_xlsx_file(filename: str, term: str) -> dict[str, list]:
+    """Returns a dictionary mapping the term parameter variable to
+    a list of values that represent data stored under the column
+    titled as term inside the file named filename.
+
+    Preconditions:
+      - filename refers to a valid xlsx file.
     """
     search_term_interest = {}
     data = pandas.read_excel(filename)
@@ -28,17 +32,18 @@ def read_xslx_file(filename: str, term: str) -> dict[str, list]:
 
 
 def create_line_plots(term: str) -> px.line():
+    """Plot a line graph to visualize the relationship between the term
+    parameter variable and time for 6 different countries and worldwide.
     """
-    Plot a line graph corresponding to each term.
-    """
-    japan_terms = read_xslx_file('search_terms/search_term_japan.xlsx', term)[term]
-    italy_terms = read_xslx_file('search_terms/search_term_italy.xlsx', term)[term]
-    canada_terms = read_xslx_file('search_terms/search_term_canada.xlsx', term)[term]
-    iran_terms = read_xslx_file('search_terms/search_term_iran.xlsx', term)[term]
-    uk_terms = read_xslx_file('search_terms/search_term_uk.xlsx', term)[term]
-    us_terms = read_xslx_file('search_terms/search_term_us.xlsx', term)[term]
-    world_terms = read_xslx_file('search_terms/search_term_worldwide.xlsx', term)[term]
-    week = read_xslx_file('search_terms/search_term_worldwide.xlsx', 'Week')['Week']
+    # Retrieve all data and store them as individual lists
+    japan_terms = read_xlsx_file('search_terms/search_term_japan.xlsx', term)[term]
+    italy_terms = read_xlsx_file('search_terms/search_term_italy.xlsx', term)[term]
+    canada_terms = read_xlsx_file('search_terms/search_term_canada.xlsx', term)[term]
+    iran_terms = read_xlsx_file('search_terms/search_term_iran.xlsx', term)[term]
+    uk_terms = read_xlsx_file('search_terms/search_term_uk.xlsx', term)[term]
+    us_terms = read_xlsx_file('search_terms/search_term_us.xlsx', term)[term]
+    world_terms = read_xlsx_file('search_terms/search_term_worldwide.xlsx', term)[term]
+    week = read_xlsx_file('search_terms/search_term_worldwide.xlsx', 'Week')['Week']
 
     fig = px.line(x=week, y=[
         japan_terms, italy_terms, canada_terms, iran_terms, uk_terms, us_terms, world_terms
@@ -58,9 +63,8 @@ def create_line_plots(term: str) -> px.line():
 
 
 def plot_line_graphs() -> None:
-    """
-    Plot interactive line graph.
-    Use the button to switch between different sectors.
+    """Plots interactive line graphs.
+    Use the buttons to switch between different search terms.
     """
     depression_trace = list(create_line_plots('depression').select_traces())
     anxiety_trace = list(create_line_plots('anxiety').select_traces())
@@ -75,7 +79,7 @@ def plot_line_graphs() -> None:
     data = depression_trace + anxiety_trace + ocd_1_trace + ocd_2_trace + insomnia_trace +\
         panic_attack_trace + mental_health_trace + counseling_trace + psychiatrist_trace
 
-    updatemenus = [
+    update_menus = [
         dict(active=-1,
              buttons=list([
                  dict(label='Depression',
@@ -213,7 +217,7 @@ def plot_line_graphs() -> None:
 
     layout = dict(title='COVID-19 Impact on Public Attention Toward '
                         'Mental Health Related Search Terms',
-                  showlegend=True, updatemenus=updatemenus)
+                  showlegend=True, updatemenus=update_menus)
 
     fig = dict(data=data, layout=layout)
     pio.show(fig)

@@ -23,16 +23,19 @@ from load_regression_data import filter_dataset
 # Import filtered datasets
 FILTERED_SEARCH_INTEREST, FILTERED_GLOBAL_CASES = filter_dataset()
 
-# All Mental Health Search Terms in a list
+# All relevant mental health-related search terms in a list
 MH_SEARCH_TERMS = ['depression', 'anxiety', 'obsessive compulsive disorder', 'ocd',
                    'insomnia', 'panic attack', 'mental health', 'counseling', 'psychiatrist']
 
 
-# Plot a graph based on the search term input
 def plot_graph(search_term: str) -> plt.show():
-    """Fit a linear regression model to predict search term interest in 9 mental health
-    related key-terms (depression, anxiety, ocd, obsessive compulsive disorder, panic attack,
-    mental health, insomnia, counseling, psychiatrist) and plotting them. """
+    """Fits a linear regression model for the relationship between
+    global confirmed Covid cases and interest in search_term on Google.
+    Returns the resulting plot to help predict search_term interest.
+
+    Preconditions:
+      - search_term in MH_SEARCH_TERMS
+    """
 
     # Match the corresponding search_term input to mh_search_terms
     term_index = MH_SEARCH_TERMS.index(search_term)
@@ -73,72 +76,74 @@ def plot_graph(search_term: str) -> plt.show():
     return plt.show()
 
 
-# all the possible graphs functions
-def graph_0(event: str) -> None:
+# all the possible regression functions
+def graph_depression(event: str) -> None:
     """Plots graph for search term "depression"."""
     plot_graph(MH_SEARCH_TERMS[0])
     plt.draw()
 
 
-def graph_1(event: str) -> None:
+def graph_anxiety(event: str) -> None:
     """Plots graph for search term "anxiety"."""
     plot_graph(MH_SEARCH_TERMS[1])
     plt.draw()
 
 
-def graph_2(event: str) -> None:
+def graph_ocd_1(event: str) -> None:
     """Plots graph for search term "obsessive compulsive disorder"."""
     plot_graph(MH_SEARCH_TERMS[2])
     plt.draw()
 
 
-def graph_3(event: str) -> None:
+def graph_ocd_2(event: str) -> None:
     """Plots graph for search term "ocd"."""
     plot_graph(MH_SEARCH_TERMS[3])
     plt.draw()
 
 
-def graph_4(event: str) -> None:
+def graph_insomnia(event: str) -> None:
     """Plots graph for search term "insomnia"."""
     plot_graph(MH_SEARCH_TERMS[4])
     plt.draw()
 
 
-def graph_5(event: str) -> None:
+def graph_panic_attack(event: str) -> None:
     """Plots graph for search term "panic attack"."""
     plot_graph(MH_SEARCH_TERMS[5])
     plt.draw()
 
 
-def graph_6(event: str) -> None:
+def graph_mental_health(event: str) -> None:
     """Plots graph for search term "mental health"."""
     plot_graph(MH_SEARCH_TERMS[6])
     plt.draw()
 
 
-def graph_7(event: str) -> None:
+def graph_counseling(event: str) -> None:
     """Plots graph for search term "counseling"."""
     plot_graph(MH_SEARCH_TERMS[7])
     plt.draw()
 
 
-def graph_8(event: str) -> None:
+def graph_psychiatrist(event: str) -> None:
     """Plots graph for search term "psychiatrist"."""
     plot_graph(MH_SEARCH_TERMS[8])
     plt.draw()
 
 
 def plot_linear_regression_graph(btns: list[Button]) -> None:
-    """Plots the default graph for search time "depression"""
-    btns[0].on_clicked(graph_0)
-    btns[1].on_clicked(graph_1)
-    btns[2].on_clicked(graph_2)
-    btns[3].on_clicked(graph_3)
-    btns[4].on_clicked(graph_4)
-    btns[5].on_clicked(graph_5)
-    btns[6].on_clicked(graph_6)
-    btns[7].on_clicked(graph_7)
-    btns[8].on_clicked(graph_8)
+    """Plots interactive linear regression models with the help
+     of matplotlib Button widgets passed into the function.
+    """
+    btns[0].on_clicked(graph_depression)
+    btns[1].on_clicked(graph_anxiety)
+    btns[2].on_clicked(graph_ocd_1)
+    btns[3].on_clicked(graph_ocd_2)
+    btns[4].on_clicked(graph_insomnia)
+    btns[5].on_clicked(graph_panic_attack)
+    btns[6].on_clicked(graph_mental_health)
+    btns[7].on_clicked(graph_counseling)
+    btns[8].on_clicked(graph_psychiatrist)
 
 
 if __name__ == '__main__':

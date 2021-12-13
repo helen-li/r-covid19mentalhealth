@@ -18,6 +18,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 from wordcloud import WordCloud
 import process_text
 
+# A list of words to ignore when generating word clouds
 STOPWORDS = {
     "a", "able", "about", "across", "after", "all", "almost", "also", "am", "among", "an",
     "and", "any", "are", "as", "at", "be", "because", "been", "but", "by", "can", "cannot",
@@ -79,22 +80,23 @@ class Subreddit:
 
     def __init__(self, channel: str, filename: str) -> None:
         """
-        Initialize a new subreddit channel.
+        Initialize a new subreddit channel by extracting data
+        about posts from a csv file named filename.
 
-        The channel starts by reading a file with data about posts.
+        Preconditions:
+          - filename refers to a valid csv file.
         """
         self._channel = channel
         self._posts = []
 
         with open(filename) as file:
             reader = csv.reader(file)
-
             # Skip header row
             next(reader)
 
             for row in reader:
                 subreddit = row[3]
-                # Checks that the post is in the correct subreddit channel
+                # Checks that the post in the current row is for the correct subreddit
                 if subreddit == channel:
                     author = row[0]
                     created_utc = int(row[1])
@@ -107,9 +109,9 @@ class Subreddit:
                                                   subreddit=subreddit, title=title, text=selftext))
 
     def words_frequency(self, keywords: set[str]) -> dict[str, int]:
-        """
-        Counts the frequency of words in the posts in this subreddit and returns
-        a dictionary mapping each keyword to its corresponding count.
+        """Counts the frequency of the set of keywords in the posts in
+        this subreddit and returns a dictionary mapping each keyword
+        to its corresponding count.
         """
         frequencies_so_far = {}
 
@@ -127,8 +129,14 @@ class Subreddit:
         return frequencies_so_far
 
     def intensity_analysis(self) -> dict[int, float]:
-        """
-        Returns a dictionary that maps timestamps to compound intensity values of posts.
+        """Performs valence-based sentiment analysis on the posts in
+        this subreddit using helper functions from the nltk library.
+
+        Returns a dictionary mapping the timestamps of each post to
+        the average calculated from the compound intensity values of
+        each sentence in the post. The closer the compound value is to
+        +1, the more positive the sentiment; the closer the compound
+        value is to -1, the more negative the sentiment.
         """
         sia = SentimentIntensityAnalyzer()
         posts_intensity_so_far = {}
@@ -145,8 +153,8 @@ class Subreddit:
         return posts_intensity_so_far
 
     def word_cloud(self, output_file: str) -> None:
-        """
-        Generates a word cloud and stores the output image in a file named output_file.
+        """Generates a word cloud based on the posts in this subreddit
+        and stores the output image in a file named output_file.
         """
         text = ''
         for post in self._posts:
@@ -159,9 +167,16 @@ class Subreddit:
 
 
 def polarity_analysis(intensities: dict[int, float]) -> dict[str, int]:
-    """
-    Returns the number of positive, negative, and neutral posts based intensity values
-    passed in from intensities.
+    """Performs polarity-based sentiment analysis using the compound
+    intensity values passed in from the intensities dictionary.
+
+    A post is judged as positive if the compound score is greater than or
+    equal to 0.05, negative if the compound score is less than or equal to
+    -0.05, and neutral if the compound score is between -0.05 and 0.05.
+
+    Returns a dictionary of length 3 that maps 'positive', 'negative',
+    and 'neutral' to the respective number of positive, negative,
+    and neutral posts detected from the intensities parameter variable.
     """
     pos, neg, neu = 0, 0, 0
 
@@ -177,9 +192,8 @@ def polarity_analysis(intensities: dict[int, float]) -> dict[str, int]:
 
 
 def average_intensity(intensities: list[float]) -> float:
-    """
-    Returns the average of the values in intensities if intensities is not an empty
-    list; otherwise, returns 0.
+    """Returns the average of the values in intensities if
+    intensities is not an empty list; otherwise, returns 0.
 
     >>> average_intensity([3.4, 5.2, 9.0, 2.4])
     5.0
