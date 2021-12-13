@@ -17,19 +17,21 @@ from pmaw import PushshiftAPI
 
 def scrape_subreddit_posts(after: int, before: int, subreddits: tuple, filename: str) -> None:
     """
-    From the channels given by the subreddits tuple, scrapes all posts that got posted during
-    the timeframe defined by after and before, which are timestamps representing UTC, and then
-    writes all the scraped data into a file named as filename.csv in the data folder. The csv
-    file will contain 5 columns: author, timestamp, subreddit, title, and selftext (post text).
+    From the channels given by the subreddits tuple, scrapes all posts that got
+    posted during the timeframe defined by after and before, which are timestamps
+    representing UTC, and then writes all the scraped data into a file named as
+    filename.csv inside the data folder.
 
-    The limit is set as 10,000 posts per subreddit for the sake of limiting the time it takes
-    to write and also perform analysis on the data. This can be further extended if necessary.
+    The csv file will contain 5 columns: author, timestamp, subreddit, title,
+    and selftext (actual body of text of the post). The limit is set to 10,000
+    posts per subreddit for the sake of limiting the time it takes to scrape
+    and export the data. This limit can be further extended if necessary.
     """
     api = PushshiftAPI()
     posts_so_far = []
 
     for subreddit in subreddits:
-        # a list of dictionaries mapping each filtered column to the corresponding content
+        # A list of dictionaries mapping each element in filter to the corresponding content
         posts = api.search_submissions(
             subreddit=subreddit, before=before, after=after, limit=10000,
             filter=['author', 'created_utc', 'subreddit', 'title', 'selftext']

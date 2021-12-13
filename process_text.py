@@ -134,13 +134,13 @@ PREDEFINED_CONTRACTIONS = {
 
 def count_words(text: str, target_word: str) -> int:
     """
-    Counts the number of times target_word appears in text, case insensitive.
+    Returns the number of times target_word appears in text, case insensitive.
 
     Preconditions:
       - all(char.isalpha() for char in target_word)
 
-    >>> count_words('Coronavirus is ruining my life. When will coronavirus die?', 'coronavirus')
-    2
+    >>> count_words('Coronavirus is ruining my life. When will this end?', 'coronavirus')
+    1
     >>> count_words('Coronavirus is ruining my life, but I like drinking corona', 'corona')
     2
     """
@@ -156,8 +156,9 @@ def count_words(text: str, target_word: str) -> int:
 
 def filter_text(text: str) -> str:
     """
-    Returns the lowercase version of text after filtering out any non-alphabetic characters
-    and expanding any contractions stored in the PREDEFINED_CONTRACTIONS mapping.
+    Returns the lowercase version of text after filtering out any
+    non-alphabetic characters and expanding any contractions stored
+    in the PREDEFINED_CONTRACTIONS dictionary.
 
     >>> filter_text("Hello, I'm slightly depressed")
     'hello i am slightly depressed'
@@ -181,11 +182,15 @@ def filter_text(text: str) -> str:
 
 def eliminate_contractions(text: str) -> [str, bool]:
     """
-    Returns a list of 2 values, first of which is the same string with contractions expanded
-    and second of which is the boolean value of whether contractions were found in text.
+    Returns a list of 2 values.
+    The first value in the list is the same string as text with
+    any contractions expanded. The second value in the list is a
+    boolean representing whether any contractions were expanded.
 
     >>> eliminate_contractions("I've eaten already.")
-    'I have eaten already.'
+    ['I have eaten already.', True]
+    >>> eliminate_contractions('I am feeling great today.')
+    ['I am feeling great today.', False]
     """
     changed = False
 

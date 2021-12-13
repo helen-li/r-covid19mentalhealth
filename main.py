@@ -9,7 +9,7 @@ distribution of this code, whether as given or with any changes, are
 expressly prohibited. For more information on copyright for CSC110 materials,
 please consult our Course Syllabus.
 
-This file is Copyright (c) 2021 Helen Li.
+This file is Copyright (c) 2021 Asma Jaseem, Helen Li, Chloe Lam, Sarah Yi.
 """
 import datetime
 import nltk
@@ -35,6 +35,7 @@ if __name__ == '__main__':
     subreddits = ('depression', 'Anxiety', 'OCD', 'insomnia', 'PanicAttack',
                   'mentalhealth', 'counselling', 'Psychiatry')
 
+    # Edit this set if needed to search for the frequency of these terms in subreddits
     covid_terms = {'coronavirus'}
 
     timestamps = [

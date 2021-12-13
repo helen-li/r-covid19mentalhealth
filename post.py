@@ -52,7 +52,8 @@ class RedditPost:
 
     Representation Invariants:
       - self.name != ''
-      - self.text != '[removed]'
+      - self.subreddit != ''
+      - text != ['[removed]']
 
     Sample Usage:
     >>> post = RedditPost(name='GoldWhale', timestamp=1548391541, subreddit='depression',\
@@ -128,7 +129,6 @@ class Subreddit:
     def intensity_analysis(self) -> dict[int, float]:
         """
         Returns a dictionary that maps timestamps to compound intensity values of posts.
-
         """
         sia = SentimentIntensityAnalyzer()
         posts_intensity_so_far = {}
@@ -180,6 +180,11 @@ def average_intensity(intensities: list[float]) -> float:
     """
     Returns the average of the values in intensities if intensities is not an empty
     list; otherwise, returns 0.
+
+    >>> average_intensity([3.4, 5.2, 9.0, 2.4])
+    5.0
+    >>> average_intensity([])
+    0
     """
     if len(intensities) <= 0:
         return 0
