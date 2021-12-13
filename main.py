@@ -14,12 +14,17 @@ This file is Copyright (c) 2021 Asma Jaseem, Helen Li, Chloe Lam, Sarah Yi.
 import datetime
 import nltk
 import ssl
+from matplotlib import pyplot as plt
+from matplotlib.widgets import Button
 from reddit_scrape import scrape_subreddit_posts as scrape
 import post
 from display_line_graphs import plot_line_graphs
-# from lin_regression import plot_linear_regression_graph
+from lin_regression import plot_linear_regression_graph, MH_SEARCH_TERMS
 
 if __name__ == '__main__':
+    # Plots the line graphs
+    plot_line_graphs()
+
     # Ensure a smooth process of downloading required data resources for nltk to function
     try:
         _create_unverified_https_context = ssl._create_unverified_context
@@ -45,12 +50,6 @@ if __name__ == '__main__':
         int(datetime.datetime(2020, 4, 30, 0, 0).timestamp())
     ]
 
-    # Plots the line graphs
-    plot_line_graphs()
-
-    # Plots the linear regression models
-    # plot_linear_regression_graph()
-
     # Scraping posts data from the relevant subreddits
     print("Scraping data from reddit...")
     scrape(timestamps[0], timestamps[1], subreddits, 'before')
@@ -72,17 +71,28 @@ if __name__ == '__main__':
         after_intensity = post.average_intensity(list(after_intensities.values()))
         after_frequency = after_channel.words_frequency(covid_terms)
 
-        print(f'----- r/{subreddit} ----- \n'
-              f'::::: Intensity values ::::: \n'
+        print(f'----- r/{subreddit} ----- \n')
+        print(f'::::: Intensity values ::::: \n'
               f'Before: {before_intensity}, After: {after_intensity} \n'
               f'::::: Polarity values ::::: \n'
               f'Before: {before_polarities}, After: {after_polarities} \n'
               f'::::: Frequency of {covid_terms} in r/{subreddit} ::::: \n'
               f'After: {after_frequency}')
 
-        print(f'----- Word clouds coming for r/{subreddit} ----- \n')
+        print(f'::::: Word clouds coming for r/{subreddit} :::::')
         print(f'Generating the first word cloud for subreddit r/{subreddit}...')
         before_channel.word_cloud(f'img/{subreddit}_before.png')
         print(f'Generating the second word cloud for subreddit r/{subreddit}...')
         after_channel.word_cloud(f'img/{subreddit}_after.png')
-        print(f'Word clouds generated for subreddit r/{subreddit}!')
+        print(f'Word clouds generated for subreddit r/{subreddit}! \n')
+
+    # Create buttons
+    btns = []
+    for i in range(len(MH_SEARCH_TERMS)):
+        # xposition, yposition, width, height
+        axes = plt.axes([0.1, i * 0.1, 0.2, 0.1])
+        btn = Button(axes, label=MH_SEARCH_TERMS[i], color='white', hovercolor='grey')
+        btns.append(btn)
+
+    # Plots the linear regression models
+    plot_linear_regression_graph(btns)

@@ -9,13 +9,8 @@ distribution of this code, whether as given or with any changes, are
 expressly prohibited. For more information on copyright for CSC110 materials,
 please consult our Course Syllabus.
 
-This file is Copyright (c) 2021 Sarah Xu & Chloe Lam.
+This file is Copyright (c) 2021 Sarah Xu, Chloe Lam.
 """
-
-# Importing modules and classes
-from load_global_confirmed_cases_data import read_csv_file
-from load_search_term_worldwide import read_xlsx_file
-
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Button
@@ -23,38 +18,29 @@ from matplotlib.widgets import Button
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
-# Import datasets
-global_cases = read_csv_file('covid_data/time_series_covid19_confirmed_global.csv')
-search_interest = read_xlsx_file('search_terms/search_term_worldwide.xlsx')
+from load_regression_data import filter_dataset
 
-# Filtering both datasets so that their dates (keys) are identical
-filtered_search_interest = {}
-for date in search_interest:
-    if date in global_cases:
-        filtered_search_interest[date] = search_interest[date]
-
-filtered_global_cases = {}
-for date in filtered_search_interest:
-    if date in search_interest:
-        filtered_global_cases[date] = global_cases[date]
+# Import filtered datasets
+FILTERED_SEARCH_INTEREST, FILTERED_GLOBAL_CASES = filter_dataset()
 
 # All Mental Health Search Terms in a list
-mh_search_terms = ['depression', 'anxiety', 'obsessive compulsive disorder', 'ocd',
+MH_SEARCH_TERMS = ['depression', 'anxiety', 'obsessive compulsive disorder', 'ocd',
                    'insomnia', 'panic attack', 'mental health', 'counseling', 'psychiatrist']
 
 
 # Plot a graph based on the search term input
-def plot_graph(search_term: str):
+def plot_graph(search_term: str) -> plt.show():
     """Fit a linear regression model to predict search term interest in 9 mental health
     related key-terms (depression, anxiety, ocd, obsessive compulsive disorder, panic attack,
     mental health, insomnia, counseling, psychiatrist) and plotting them. """
 
     # Match the corresponding search_term input to mh_search_terms
-    term_index = mh_search_terms.index(search_term)
+    term_index = MH_SEARCH_TERMS.index(search_term)
 
     # Generate x and y values
-    x = np.array([cases for cases in filtered_global_cases.values()]).reshape((-1, 1))
-    y = np.array([filtered_search_interest[key][term_index] for key in filtered_search_interest.keys()])
+    x = np.array(list(FILTERED_GLOBAL_CASES.values())).reshape((-1, 1))
+    y = np.array([FILTERED_SEARCH_INTEREST[key][term_index] for key in
+                  FILTERED_SEARCH_INTEREST])
 
     # Create a linear regression object
     regr = LinearRegression()
@@ -87,71 +73,62 @@ def plot_graph(search_term: str):
     return plt.show()
 
 
-# Create buttons
-btns = []
-for i in range(len(mh_search_terms)):
-    # xposition, yposition, width, height
-    axes = plt.axes([0.1, i * 0.1, 0.2, 0.1])
-    btn = Button(axes, label=mh_search_terms[i], color='white', hovercolor='grey')
-    btns.append(btn)
-
-
 # all the possible graphs
 def graph_0(event) -> None:
     """Plots graph for search term "depression"."""
-    plot_graph(mh_search_terms[0])
+    plot_graph(MH_SEARCH_TERMS[0])
     plt.draw()
 
 
 def graph_1(event) -> None:
     """Plots graph for search term "anxiety"."""
-    plot_graph(mh_search_terms[1])
+    plot_graph(MH_SEARCH_TERMS[1])
     plt.draw()
 
 
 def graph_2(event) -> None:
     """Plots graph for search term "obsessive compulsive disorder"."""
-    plot_graph(mh_search_terms[2])
+    plot_graph(MH_SEARCH_TERMS[2])
     plt.draw()
 
 
 def graph_3(event) -> None:
     """Plots graph for search term "ocd"."""
-    plot_graph(mh_search_terms[3])
+    plot_graph(MH_SEARCH_TERMS[3])
     plt.draw()
 
 
 def graph_4(event) -> None:
     """Plots graph for search term "insomnia"."""
-    plot_graph(mh_search_terms[4])
+    plot_graph(MH_SEARCH_TERMS[4])
     plt.draw()
 
 
 def graph_5(event) -> None:
     """Plots graph for search term "panic attack"."""
-    plot_graph(mh_search_terms[5])
+    plot_graph(MH_SEARCH_TERMS[5])
     plt.draw()
 
 
 def graph_6(event) -> None:
     """Plots graph for search term "mental health"."""
-    plot_graph(mh_search_terms[6])
+    plot_graph(MH_SEARCH_TERMS[6])
     plt.draw()
 
 
 def graph_7(event) -> None:
     """Plots graph for search term "counseling"."""
-    plot_graph(mh_search_terms[7])
+    plot_graph(MH_SEARCH_TERMS[7])
     plt.draw()
 
 
 def graph_8(event) -> None:
     """Plots graph for search term "psychiatrist"."""
-    plot_graph(mh_search_terms[8])
+    plot_graph(MH_SEARCH_TERMS[8])
     plt.draw()
 
 
-def plot_linear_regression_graph() -> None:
+def plot_linear_regression_graph(btns: list[Button]) -> None:
     """Plots the default graph for search time "depression"""
     btns[0].on_clicked(graph_0)
     btns[1].on_clicked(graph_1)
@@ -162,3 +139,25 @@ def plot_linear_regression_graph() -> None:
     btns[6].on_clicked(graph_6)
     btns[7].on_clicked(graph_7)
     btns[8].on_clicked(graph_8)
+
+
+if __name__ == '__main__':
+    import python_ta
+    import python_ta.contracts
+    import doctest
+
+    doctest.testmod()
+    python_ta.contracts.DEBUG_CONTRACTS = False
+    python_ta.contracts.check_all_contracts()
+
+    python_ta.check_all(config={
+        # the names (strs) of imported modules
+        'extra-imports': ['numpy', 'matplotlib.pyplot', 'matplotlib.widgets',
+                          'sklearn.linear_model', 'sklearn.metrics',
+                          'load_global_confirmed_cases_data', 'load_search_term_worldwide',
+                          'python_ta.contacts', 'python_ta'],
+        # the names (strs) of functions that call print/open/input
+        'allowed-io': ['read_csv_file', 'plot_graph'],
+        'max-line-length': 100,
+        'disable': ['R1705', 'C0200']
+    })
