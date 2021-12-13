@@ -17,7 +17,7 @@ import pandas
 import openpyxl
 
 
-def read_xslx_file(filename: str, term: str) -> dict:
+def read_xslx_file(filename: str, term: str) -> dict[str, list]:
     """
     Returns data for the terms based on data stored in the file given by filename.
     """
@@ -45,11 +45,11 @@ def create_line_plots(term: str) -> px.line():
         japan_terms, italy_terms, canada_terms, iran_terms, uk_terms, us_terms, world_terms
     ], labels={'value': 'search term frequency', 'x': 'week', 'variable': 'country'})
 
+    # For renaming the default legends to the name of the countries
     new_names = {
         'wide_variable_0': 'japan', 'wide_variable_1': 'italy',
         'wide_variable_2': 'canada', 'wide_variable_3': 'iran',
-        'wide_variable_4': 'uk', 'wide_variable_5': 'us', 'wide_variable_6': 'world'}
-
+        'wide_variable_4': 'uk', 'wide_variable_5': 'us', 'wide_variable_6': 'worldwide'}
     fig.for_each_trace(lambda t: t.update(
         name=new_names[t.name], legendgroup=new_names[t.name],
         hovertemplate=t.hovertemplate.replace(t.name, new_names[t.name])
@@ -223,13 +223,15 @@ def plot_line_graphs() -> None:
 if __name__ == '__main__':
     import python_ta
     import python_ta.contracts
+    import doctest
 
+    doctest.testmod()
     python_ta.contracts.DEBUG_CONTRACTS = False
     python_ta.contracts.check_all_contracts()
 
     python_ta.check_all(config={
         # the names (strs) of imported modules
-        'extra-imports': ['plotly.express', 'plotly.io', 'pandas',
+        'extra-imports': ['plotly.express', 'plotly.io', 'pandas', 'doctest',
                           'openpyxl', 'python_ta.contacts', 'python_ta'],
         # the names (strs) of functions that call print/open/input
         'allowed-io': [],

@@ -14,6 +14,7 @@ This file is Copyright (c) 2021 Helen Li.
 import pandas
 from pmaw import PushshiftAPI
 
+
 def scrape_subreddit_posts(after: int, before: int, subreddits: tuple, filename: str) -> None:
     """
     From the channels given by the subreddits tuple, scrapes all posts that got posted during
@@ -45,13 +46,15 @@ def scrape_subreddit_posts(after: int, before: int, subreddits: tuple, filename:
 if __name__ == '__main__':
     import python_ta
     import python_ta.contracts
+    import doctest
 
+    doctest.testmod()
     python_ta.contracts.DEBUG_CONTRACTS = False
     python_ta.contracts.check_all_contracts()
 
     python_ta.check_all(config={
         # the names (strs) of imported modules
-        'extra-imports': ['pandas', 'pmaw', 'python_ta.contacts', 'python_ta'],
+        'extra-imports': ['pandas', 'pmaw', 'python_ta.contacts', 'python_ta', 'doctest'],
         # the names (strs) of functions that call print/open/input
         'allowed-io': ['scrape_subreddit_posts'],
         'max-line-length': 100,

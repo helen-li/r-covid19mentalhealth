@@ -93,6 +93,7 @@ class Subreddit:
 
             for row in reader:
                 subreddit = row[3]
+                # Checks that the post is in the correct subreddit channel
                 if subreddit == channel:
                     author = row[0]
                     created_utc = int(row[1])
@@ -188,14 +189,16 @@ def average_intensity(intensities: list[float]) -> float:
 if __name__ == '__main__':
     import python_ta
     import python_ta.contracts
+    import doctest
 
+    doctest.testmod()
     python_ta.contracts.DEBUG_CONTRACTS = False
     python_ta.contracts.check_all_contracts()
 
     python_ta.check_all(config={
         # the names (strs) of imported modules
         'extra-imports': ['dataclasses', 'csv', 'nltk', 'nltk.sentiment', 'wordcloud',
-                          'process_text', 'python_ta.contacts', 'python_ta'],
+                          'process_text', 'python_ta.contacts', 'python_ta', 'doctest'],
         # the names (strs) of functions that call print/open/input
         'allowed-io': ['__init__'],
         'max-line-length': 100,

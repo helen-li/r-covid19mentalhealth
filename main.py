@@ -65,8 +65,6 @@ if __name__ == '__main__':
         after_intensities = after_channel.intensity_analysis()
         after_polarities = post.polarity_analysis(after_intensities)
         after_intensity = post.average_intensity(list(after_intensities.values()))
-
-        before_frequency = before_channel.words_frequency(covid_terms)
         after_frequency = after_channel.words_frequency(covid_terms)
 
         print(f'----- r/{subreddit} ----- \n'
@@ -74,10 +72,11 @@ if __name__ == '__main__':
               f'Before: {before_intensity}, After: {after_intensity} \n'
               f'::::: Polarity values ::::: \n'
               f'Before: {before_polarities}, After: {after_polarities} \n'
-              f'::::: Frequency of "coronavirus" in r/{subreddit} ::::: \n'
-              f'Before: {before_frequency}, After: {after_frequency}')
+              f'::::: Frequency of {covid_terms} in r/{subreddit} ::::: \n'
+              f'After: {after_frequency}')
 
-        print(f'Generating the first word cloud for subreddit r/{subreddit}...')
+        print(f'----- Word clouds coming for r/{subreddit} ----- \n'
+              f'Generating the first word cloud for subreddit r/{subreddit}...')
         before_channel.word_cloud(f'img/{subreddit}_before.png')
         print(f'Generating the second word cloud for subreddit r/{subreddit}...')
         after_channel.word_cloud(f'img/{subreddit}_after.png')

@@ -200,13 +200,15 @@ def eliminate_contractions(text: str) -> [str, bool]:
 if __name__ == '__main__':
     import python_ta
     import python_ta.contracts
+    import doctest
 
+    doctest.testmod()
     python_ta.contracts.DEBUG_CONTRACTS = False
     python_ta.contracts.check_all_contracts()
 
     python_ta.check_all(config={
         # the names (strs) of imported modules
-        'extra-imports': ['python_ta.contacts', 'python_ta'],
+        'extra-imports': ['python_ta.contacts', 'python_ta', 'doctest'],
         # the names (strs) of functions that call print/open/input
         'allowed-io': [],
         'max-line-length': 100,
