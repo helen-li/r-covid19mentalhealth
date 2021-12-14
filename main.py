@@ -72,7 +72,7 @@ if __name__ == '__main__':
         after_intensity = post.average_intensity(list(after_intensities.values()))
         after_frequency = after_channel.words_frequency(covid_terms)
 
-        print(f'----- r/{subreddit} ----- \n')
+        print(f'----- r/{subreddit} -----')
         print(f'::::: Intensity values ::::: \n'
               f'Before: {before_intensity}, After: {after_intensity} \n'
               f'::::: Polarity values ::::: \n'

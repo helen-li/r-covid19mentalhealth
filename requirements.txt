@@ -4,10 +4,10 @@
 hypothesis
 pytest
 python-ta
+doctest
 
 # Graphics and data visualization
 plotly
-pygame
 pmaw
 csv
 pandas
@@ -20,5 +20,4 @@ scikit-learn
 # Sentiment analysis
 nltk
 ssl
-nltk.sentiment
 wordcloud

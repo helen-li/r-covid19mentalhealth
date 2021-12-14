@@ -32,7 +32,7 @@ def read_xlsx_file(filename: str) -> dict:
     df = pd.read_excel(filename)
     # select first column that lists the dates
     first_column = df.iloc[:, 0]
-    # dictionary to return.
+    # dictionary to return
     dictionary = {}
 
     # iterate through each element in first column
