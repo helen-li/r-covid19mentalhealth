@@ -77,55 +77,55 @@ def plot_graph(search_term: str) -> plt.show():
 
 
 # all the possible regression functions
-def graph_depression(event: str) -> None:
+def graph_depression(_event: str) -> None:
     """Plots graph for search term "depression"."""
     plot_graph(MH_SEARCH_TERMS[0])
     plt.draw()
 
 
-def graph_anxiety(event: str) -> None:
+def graph_anxiety(_event: str) -> None:
     """Plots graph for search term "anxiety"."""
     plot_graph(MH_SEARCH_TERMS[1])
     plt.draw()
 
 
-def graph_ocd_1(event: str) -> None:
+def graph_ocd_1(_event: str) -> None:
     """Plots graph for search term "obsessive compulsive disorder"."""
     plot_graph(MH_SEARCH_TERMS[2])
     plt.draw()
 
 
-def graph_ocd_2(event: str) -> None:
+def graph_ocd_2(_event: str) -> None:
     """Plots graph for search term "ocd"."""
     plot_graph(MH_SEARCH_TERMS[3])
     plt.draw()
 
 
-def graph_insomnia(event: str) -> None:
+def graph_insomnia(_event: str) -> None:
     """Plots graph for search term "insomnia"."""
     plot_graph(MH_SEARCH_TERMS[4])
     plt.draw()
 
 
-def graph_panic_attack(event: str) -> None:
+def graph_panic_attack(_event: str) -> None:
     """Plots graph for search term "panic attack"."""
     plot_graph(MH_SEARCH_TERMS[5])
     plt.draw()
 
 
-def graph_mental_health(event: str) -> None:
+def graph_mental_health(_event: str) -> None:
     """Plots graph for search term "mental health"."""
     plot_graph(MH_SEARCH_TERMS[6])
     plt.draw()
 
 
-def graph_counseling(event: str) -> None:
+def graph_counseling(_event: str) -> None:
     """Plots graph for search term "counseling"."""
     plot_graph(MH_SEARCH_TERMS[7])
     plt.draw()
 
 
-def graph_psychiatrist(event: str) -> None:
+def graph_psychiatrist(_event: str) -> None:
     """Plots graph for search term "psychiatrist"."""
     plot_graph(MH_SEARCH_TERMS[8])
     plt.draw()
@@ -159,7 +159,7 @@ if __name__ == '__main__':
         # the names (strs) of imported modules
         'extra-imports': ['numpy', 'matplotlib.pyplot', 'matplotlib.widgets',
                           'sklearn.linear_model', 'sklearn.metrics',
-                          'oad_regression_data', 'python_ta.contacts', 'python_ta'],
+                          'load_regression_data', 'python_ta.contacts', 'python_ta'],
         # the names (strs) of functions that call print/open/input
         'allowed-io': ['read_csv_file', 'plot_graph'],
         'max-line-length': 100,

@@ -152,18 +152,24 @@ class Subreddit:
 
         return posts_intensity_so_far
 
-    def word_cloud(self, output_file: str) -> None:
+    def word_cloud(self, output_file: str) -> bool:
         """Generates a word cloud based on the posts in this subreddit
         and stores the output image in a file named output_file.
+
+        Returns True if the word cloud was successfully generated; otherwise, False.
         """
         text = ''
         for post in self._posts:
             text = text + ' '.join(post.title) + ' ' + ' '.join(post.text)
 
-        wordcloud = WordCloud(stopwords=STOPWORDS, colormap='Reds',
-                              width=1000, height=1000, mode='RGBA',
-                              background_color='white').generate(process_text.filter_text(text))
-        wordcloud.to_file(output_file)
+        if text != '':
+            wordcloud = WordCloud(stopwords=STOPWORDS, colormap='Reds',
+                                  width=1000, height=1000, mode='RGBA',
+                                  background_color='white').generate(process_text.filter_text(text))
+            wordcloud.to_file(output_file)
+            return True
+        else:
+            return False
 
 
 def polarity_analysis(intensities: dict[int, float]) -> dict[str, int]:

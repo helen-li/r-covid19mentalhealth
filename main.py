@@ -82,10 +82,18 @@ if __name__ == '__main__':
 
         print(f'::::: Word clouds coming for r/{subreddit} :::::')
         print(f'Generating the first word cloud for subreddit r/{subreddit}...')
-        before_channel.word_cloud(f'img/{subreddit}_before.png')
-        print(f'Generating the second word cloud for subreddit r/{subreddit}...')
-        after_channel.word_cloud(f'img/{subreddit}_after.png')
-        print(f'Word clouds generated for subreddit r/{subreddit}! \n')
+        before_cloud = before_channel.word_cloud(f'img/{subreddit}_before.png')
+        if before_cloud:
+            print(f'Generating the second word cloud for subreddit r/{subreddit}...')
+            after_cloud = after_channel.word_cloud(f'img/{subreddit}_after.png')
+            if after_cloud:
+                print(f'Word clouds generated for subreddit r/{subreddit}! \n')
+            else:
+                print(f'There was an error in creating the second word cloud for '
+                      f'r/{subreddit} due to unsuccessful scraping.')
+        else:
+            print(f'There was an error in creating the first word cloud for '
+                  f'r/{subreddit} due to unsuccessful scraping.')
 
     # Create buttons
     btns = []

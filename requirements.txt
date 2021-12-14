@@ -4,14 +4,11 @@
 hypothesis
 pytest
 python-ta
-doctest
 
 # Graphics and data visualization
 plotly
 pmaw
-csv
 pandas
-datetime
 matplotlib
 openpyxl
 numpy
